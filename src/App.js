@@ -5,23 +5,24 @@ import { useState } from 'react';
 //JSX is syntax extension to javascript or Javascript XML
 function App() {
   const [inputValue, setInputValue] = useState("");
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState(JSON.parse(localStorage.getItem("todo")) || []);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
   }
   const handleAddClick = () =>{
-    setTodo([...todo, {id: uuid() , todo: inputValue, isChecked: false}])
+    const updatedTodo = [...todo,  {id: uuid() , todo: inputValue, isChecked: false}]
+    setTodo(localStorage.setItem("todo", JSON.stringify(updatedTodo)))
     setInputValue("");
   }
   const handleDeleteClick = (id) =>{
      const updatedTodo = todo.filter( item => item.id !== id);
-     setTodo(updatedTodo);
+     setTodo(localStorage.setItem("todo",JSON.stringify(updatedTodo)));
   }
  const handleCheckedChange = (event,todoId) =>{
   const updatedTodo = todo.map( item => item.id === todoId ? 
 ({...item, isChecked: event.target.checked}) : item);
-  setTodo(updatedTodo);
+  setTodo(localStorage.setItem("todo", JSON.stringify(updatedTodo)));
  }
   return (
     <div className="App">
