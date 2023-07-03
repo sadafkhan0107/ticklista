@@ -1,6 +1,8 @@
 import './App.css';
 import {v4 as uuid} from 'uuid'
 import { useState } from 'react';
+import { Navbar } from './components/Navbar/Navbar';
+import { Footer } from './components/Footer/Footer';
 
 //JSX is syntax extension to javascript or Javascript XML
 function App() {
@@ -28,26 +30,31 @@ function App() {
   localStorage.setItem("todo", JSON.stringify(updatedTodo))
  }
   return (
-    <div className="App">
-      <input value={inputValue} placeholder='todo' onChange={handleChange}/>
-      <button onClick={handleAddClick} >Add todo</button>
-      <div className='todos'>
+    <>
+    <Navbar />
+    <div className="App d-flex d-column gap-sm">
+      <div>
+          <input value={inputValue} placeholder='todo' onChange={handleChange}/>
+          <button className='btn' onClick={handleAddClick} >Add todo</button>
+      </div>
+      <div className='todos d-flex d-column'>
         {
           todo.map(item =>
-              <div key={item.id}> 
-              <label className={item.isChecked ? 'strike' : ''}>
-                <input type='checkbox'onClick={(event) => handleCheckedChange(event, item.id)} checked = {item.isChecked}/>
-                {item.todo}
-              </label>   
-             <button onClick={() => handleDeleteClick(item.id)}> 
-             <span className="material-icons-outlined"> delete</span> 
-             </button> 
-            </div>
-          
+              <div className='single-todo' key={item.id}> 
+                <label className={item.isChecked ? 'strike' : ''}>
+                  <input type='checkbox'onClick={(event) => handleCheckedChange(event, item.id)} checked = {item.isChecked}/>
+                  <span className='todo-text'>{item.todo}</span>
+                </label>   
+                <button className='btn' onClick={() => handleDeleteClick(item.id)}> 
+                  <span className="material-icons-outlined"> delete</span> 
+                </button> 
+            </div> 
           )
         }
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
 

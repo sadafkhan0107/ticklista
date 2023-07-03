@@ -1,0 +1,27 @@
+
+.footer-container{
+    width: 100vw;
+    justify-content: center;
+    margin-top: 1rem;
+    padding: 10px 0;
+    border-top: 1px solid #d1d5db;
+    background-color: var(--background-color);
+}
+.align-center{
+    align-items: center;
+}
+.d-column{
+    flex-direction: column;
+}
+.foot-logo{
+    width: 2rem;
+    height: 2rem;
+}
+.foot-soc{
+    gap: 1rem;
+    margin-top: 12px;
+}
+.fix-pos{
+    position: fixed;
+    bottom: 0;
+}
