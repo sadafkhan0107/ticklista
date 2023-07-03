@@ -33,24 +33,28 @@ function App() {
     <>
     <Navbar />
     <div className="App d-flex d-column gap-sm">
-      <div>
-          <input value={inputValue} placeholder='todo' onChange={handleChange}/>
-          <button className='btn' onClick={handleAddClick} >Add todo</button>
-      </div>
-      <div className='todos d-flex d-column'>
-        {
-          todo.map(item =>
-              <div className='single-todo' key={item.id}> 
-                <label className={item.isChecked ? 'strike' : ''}>
-                  <input type='checkbox'onClick={(event) => handleCheckedChange(event, item.id)} checked = {item.isChecked}/>
-                  <span className='todo-text'>{item.todo}</span>
-                </label>   
-                <button className='btn' onClick={() => handleDeleteClick(item.id)}> 
-                  <span className="material-icons-outlined"> delete</span> 
-                </button> 
-            </div> 
-          )
-        }
+      <div className='todo-app'>
+        <div className='d-flex gap-sm'>
+            <input className =  'input' value={inputValue} placeholder='Add your wishlist here...' onChange={handleChange}/>
+            <button className='btn add-btn' onClick={handleAddClick} >Add</button>
+        </div>
+        <div className='todos d-flex d-column gap-sm'>
+          {
+            todo.map(item =>
+                <div className='single-todo d-flex' key={item.id}> 
+                 <div>
+                    <input id='todo-label' className= 'checkbox' type='checkbox'onClick={(event) => handleCheckedChange(event, item.id)} checked = {item.isChecked}/>
+                    <label for="todo-label" className= {`${item.isChecked ? 'strike' : ''} todo-text`} >
+                      {item.todo}
+                    </label>  
+                  </div> 
+                  <button className='btn del-btn' onClick={() => handleDeleteClick(item.id)}> 
+                    <span className="material-icons-outlined del-span"> delete</span> 
+                  </button> 
+              </div> 
+            )
+          }
+        </div>
       </div>
     </div>
     <Footer />

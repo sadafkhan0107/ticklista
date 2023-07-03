@@ -1,8 +1,21 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+  background-color: #f9fafb;
+}
+
 .App {
-  text-align: center;
-  justify-content: center;
+  align-items: center;
   margin-top: 7rem;
 }
 :root{
@@ -10,12 +23,14 @@
 }
 .todos{
   list-style-type: none;
-  text-align: center;
-  width: 100vw;
   height: 50vh;
   overflow-y: auto;
+  margin-top: 1rem;
 }
 
+.todo-app{
+  width: 35rem;
+}
 .strike {
   text-decoration: line-through;
 }
@@ -26,16 +41,57 @@ display: flex;
 
 .btn{
   background-color: var(--primary-btn-color);
-  color: white;
+  color: #fafafa;
 }
 .todo-text{
-  margin-left: 8px;
+  font-size: 1.5rem;
+  word-break: break-word;
+  margin-left: 10px;
 }
+
+.center-align{
+  align-items: center;
+}
+
+.checkbox{
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .d-column{
   flex-direction: column; 
 }
 .gap-sm{
   gap: 8px;
 }
+.single-todo{
+  justify-content: space-between;
+}
 
+.input{
+  font-size : 1.2rem;
+  border: 1px solid var(--primary-btn-color);
+  background-color: #f9fafb;
+  border-radius: 4px;
+  padding: 8px;
+  width: 30rem;
+}
+.input:focus{
+  outline: none;
+}
+
+.add-btn{
+  border-radius: 4px;
+  font-size: 1.2rem;
+  padding: 8px 1.2rem;
+}
+
+.del-btn{
+  border: none;
+  background: transparent;
+  color: var(--primary-btn-color);
+}
+.del-span{
+  font-size: 2rem;
+}
 
