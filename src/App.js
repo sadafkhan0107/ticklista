@@ -3,11 +3,33 @@ import {v4 as uuid} from 'uuid'
 import { useState } from 'react';
 import { Navbar } from './components/Navbar/Navbar';
 import { Footer } from './components/Footer/Footer';
+import { GrowthBook } from "@growthbook/growthbook-react";
+import { useEffect } from "react";
+import { GrowthBookProvider } from "@growthbook/growthbook-react";
+import { Button } from "./components/Button";
+
+
+const growthbook = new GrowthBook({
+  apiHost: "https://cdn.growthbook.io",
+  clientKey: "sdk-ccGUnBPVkhvVmK6",
+  enableDevMode: true,
+  trackingCallback: (experiment, result) => {
+      // TODO: Use your real analytics tracking system
+      console.log("Viewed Experiment", {
+          experimentId: experiment.key,
+          variationId: result.key
+      });
+  }
+});
 
 //JSX is syntax extension to javascript or Javascript XML
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [todo, setTodo] = useState(JSON.parse(localStorage.getItem("todo")) || []);
+  useEffect(() => {
+    // Load features asynchronously when the app renders
+    growthbook.init({ streaming: true });
+}, []);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -30,13 +52,14 @@ function App() {
   localStorage.setItem("todo", JSON.stringify(updatedTodo))
  }
   return (
-    <>
-    <Navbar />
+     <GrowthBookProvider growthbook={growthbook}>
+          <Navbar />
     <div className="App d-flex d-column gap-sm">
       <div className='todo-app'>
         <div className='d-flex gap-sm'>
             <input className =  'input' value={inputValue} placeholder='Add your wishlist here...' onChange={handleChange}/>
             <button className='btn add-btn' onClick={handleAddClick} >Add</button>
+            <Button />
         </div>
         <div className='todos d-flex d-column gap-sm'>
           {
@@ -58,7 +81,9 @@ function App() {
       </div>
     </div>
     <Footer />
-    </>
+      </GrowthBookProvider>
+  
+ 
   );
 }
 
